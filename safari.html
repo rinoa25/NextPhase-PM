@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- text direction is set to left to right -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="robots" content="noindex, nofollow">
+    <!-- Sets title of web tab -->
+    <title>Registration</title>
+    <!-- Password font is imported (thus applied) -->
+    <link rel="stylesheet" href="node_modules/text-security/text-security-disc.css" type="text/css">
+    <!-- Icons are imported (thus applied) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.0/css/all.min.css" />
+    <!-- Personal CSS is imported (thus applied) -->
+    <link rel="stylesheet" href="css/safari.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- style media="screen" allows us to specify what we want to do on different sized screens -->
+    <style media="screen"></style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+
+    <div class="wholecon">
+
+      <form class="" id="register" name="register" onsubmit="return final();" autocomplete="off" method="post" >
+
+        <fieldset>
+
+          <h2 class="header">Create your account</h2>
+
+          <!-- Displays info warning if required -->
+          <div id="topinfo"><i class="fa fa-info-circle" style='left:-5px;font-size:18px;'></i><p></p></div>
+
+          <!-- Email textfield -->
+          <div class="container">
+
+            <input name = "DummyUsername" type="text" style="display:none;">
+
+            <label><b>Email Address</b></label><br>
+            <input type="text" placeholder="Enter your email" class="email" id="email" name="email" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="min-height: 53px;">
+
+            <!-- Displays bottom error message towards email validation -->
+            <div class="bottomerror">
+              <small></small>
+            </div>
+
+          <!-- End of email textfield -->
+          </div>
+
+          <!-- Password textfield -->
+          <div class="container">
+
+            <input name = "DummyPassword" type="text" style="display:none;">
+
+            <label><b>Password</b></label><br>
+            <input type="text" placeholder="Enter your password" class="pass" id="pass" name="pass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
+
+            <p class="temporary" id="temporary"></p>
+
+            <!-- Displays strong password label -->
+            <p class="stronglabel">Strong Password</p>
+
+            <!-- Displays message box -->
+            <div class="message">
+
+              <div class="messagekey">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.8em"
+                  height="1.8em"
+                  style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(314deg);" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)">
+                  <path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" fill="#52696D"/></g>
+                  </svg>
+              </div>
+
+              <h4>Chrome created a strong password for this website.</h4>
+              <hr>
+              <h2>This password will be saved to your Google Account and will AutoFill on all your devices. Look up your saved passwords in Google Chrome password manager. You won't have to remember it.</h2>
+
+              <button type="button" class="dontuse" id="dontuse" name="dontuse" value="dontuse">Don't Use </button>
+              <button type="button" class="usestrong" id="usestrong" name="usestrong" value="usestrong">Use Strong Password</button>
+
+            </div>
+
+            <!-- Both key and arrow icons -->
+            <div class="full-container">
+
+              <div class="normalcon">
+                <img src="images/safarikey.png" alt="">
+              </div>
+
+              <div class="hovercon">
+                <img src="images/safarihover.png" alt="">
+              </div>
+
+              <div class="yellowcon">
+                <img src="images/safariyellow.png" alt="">
+              </div>
+
+              <div class="hoveryellow">
+                <img src="images/hoveryellow.png" alt="">
+              </div>
+
+            </div>
+
+            <!-- Displays mini message box -->
+            <div class="minimessage">
+              <div class="mini-container">
+                <button type="button" class="fromweb" id="fromweb" name="fromweb" value="">
+                  <div class="minikey">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="2.2em"
+                      height="2.2em"
+                      style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(314deg);" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)">
+                      <path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" class="smallkey" fill="#727071"/></g>
+                      </svg>
+                  </div>
+                  <div class="customdesc"><p></p></div>
+                  <div class="fromdesc"><p>From this website</p></div>
+                </button>
+                <hr>
+                <!-- Displays snippet of randomly generated password -->
+                 <button type="button" class="fillagain" id="fillagain" name="fillagain" value="">Fill Password Again:<div class="snippetpass"><p></p></div></button>
+                 <input type="button" class="otherbtn" id="otherbtn" name="otherbtn" value="Other Passwords...">
+              </div>
+            </div>
+
+            <div class="smallestmessage">
+              <div class="small-container">
+                <button type="button" class="fromweb3" id="fromweb3" name="fromweb3" value="">
+                  <div class="minikey3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="2.2em"
+                      height="2.2em"
+                      style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(314deg);" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)">
+                      <path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" class="smallkey3" fill="#727071"/></g>
+                      </svg>
+                  </div>
+                  <div class="customdesc3"><p></p></div>
+                  <div class="fromdesc3"><p>From this website</p></div>
+                </button>
+                <hr>
+                <!-- Displays snippet of randomly generated password -->
+                 <button type="button" class="fillagain3" id="fillagain3" name="fillagain3" value="">Save This Password</button>
+                 <input type="button" class="otherbtn" id="otherbtn" name="otherbtn" value="Other Passwords...">
+              </div>
+            </div>
+
+            <!-- Displays bottom error message towards password validation -->
+            <div class="bottomerror">
+              <small></small>
+            </div>
+
+          <!-- End of password textfield -->
+          </div>
+
+          <!-- Confirm Password textfield -->
+          <div class="container">
+
+            <input name = "DummyPassword2" type="text" style="display:none;">
+
+            <label><b>Confirm Password</b></label><br>
+            <input type="text" placeholder="Re-enter your password" class="cpass" id="cpass" name="cpass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
+
+            <p class="temporary2" id="temporary2"></p>
+
+            <!-- Displays strong password label2 -->
+            <p class="stronglabel2">Strong Password</p>
+
+            <!-- Displays message2 box -->
+            <div class="message2">
+
+              <div class="messagekey2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.8em"
+                  height="1.8em"
+                  style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(314deg);" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)">
+                  <path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" fill="#52696D"/></g>
+                  </svg>
+              </div>
+
+              <h4>Chrome created a strong password for this website.</h4>
+              <hr>
+              <h2>This password will be saved to your Google Account and will AutoFill on all your devices. Look up your saved passwords in Google Chrome password manager. You won't have to remember it.</h2>
+
+              <button type="button" class="dontuse2" id="dontuse2" name="dontuse2" value="dontuse">Don't Use</button>
+              <button type="button" class="usestrong2" id="usestrong2" name="usestrong2" value="usestrong">Use Strong Password</button>
+
+            </div>
+
+            <!-- Both key and arrow icons -->
+            <div class="full-container2">
+
+              <div class="normalcon2">
+                <img src="images/safarikey.png" alt="">
+              </div>
+
+              <div class="hovercon2">
+                <img src="images/safarihover.png" alt="">
+              </div>
+
+              <div class="yellowcon2">
+                <img src="images/safariyellow.png" alt="">
+              </div>
+
+              <div class="hoveryellow2">
+                <img src="images/hoveryellow.png" alt="">
+              </div>
+
+            </div>
+
+            <!-- Displays mini message box -->
+            <div class="minimessage2">
+              <div class="mini-container2">
+                <button type="button" class="fromweb2" id="fromweb2" name="fromweb2" value="">
+                  <div class="minikey2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="2.2em"
+                      height="2.2em"
+                      style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(314deg);" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)">
+                      <path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" class="smallkey2" fill="#727071"/></g>
+                      </svg>
+                  </div>
+                  <div class="customdesc2"><p></p></div>
+                  <div class="fromdesc2"><p>From this website</p></div>
+                </button>
+                <hr>
+                <!-- Displays snippet of randomly generated password -->
+                 <button type="button" class="fillagain2" id="fillagain2" name="fillagain2" value="">Fill Password Again:<div class="snippetpass2"><p></p></div></button>
+                 <input type="button" class="otherbtn" id="otherbtn" name="otherbtn" value="Other Passwords...">
+              </div>
+            </div>
+
+            <div class="smallestmessage2">
+              <div class="small-container2">
+                <button type="button" class="fromweb4" id="fromweb4" name="fromweb4" value="">
+                  <div class="minikey4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="2.2em"
+                      height="2.2em"
+                      style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(314deg);" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)">
+                      <path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" class="smallkey4" fill="#727071"/></g>
+                      </svg>
+                  </div>
+                  <div class="customdesc4"><p></p></div>
+                  <div class="fromdesc4"><p>From this website</p></div>
+                </button>
+                <hr>
+                <!-- Displays snippet of randomly generated password -->
+                 <button type="button" class="fillagain4" id="fillagain4" name="fillagain4" value="">Save This Password</button>
+                 <input type="button" class="otherbtn" id="otherbtn" name="otherbtn" value="Other Passwords...">
+              </div>
+            </div>
+
+            <!-- Displays bottom error message towards confirm password validation -->
+            <div class="bottomerror">
+              <small></small>
+            </div>
+
+          <!-- End of confirm password textfield -->
+          </div>
+
+          <input type="text" placeholder="" class="usedrandom" id="usedrandom" name="usedrandom" value="">
+          <input type="text" placeholder="" class="triedrandom" id="triedrandom" name="triedrandom" value="No">
+
+          <!-- Submit button -->
+          <button type="submit" class="Register" onclick="return checkValidation();">Register</button>
+
+        </fieldset>
+
+        <!-- User created password save pop-up -->
+        <div class="overlay">
+          <div class="user-save-field">
+            <div class="safari-logo">
+              <img src="images/chromelogo.png" alt="safari logo">
+            </div>
+            <h3>Would you like to save this password?</h3>
+            <h4>You can view and remove saved passwords in your Google Acccount.</h4>
+            <button type="submit" class="user-save" id="user-save" name="status" value="Stored">Save Password</button>
+            <button type="submit" class="user-never" id="user-never" name="status" value="Discarded">Never for This Website</button>
+            <button type="submit" class="user-not-now" id="user-not-now" name="status" value="Discarded">Not Now</button>
+          </div>
+        </div>
+
+        <div class="overlay2">
+          <div class="user-save-field2">
+            <div class="safari-logo2">
+              <img src="images/chromelogo.png" alt="safari logo">
+            </div>
+            <h3>Would you like to save this password?</h3>
+            <h4>You can view and remove saved passwords in ypur Google Account.</h4>
+            <button type="submit" class="user-save2" id="user-save2" name="status" value="Stored">Save Password</button>
+            <button type="submit" class="user-not-now2" id="user-not-now2" name="status" value="Discarded">Not Now</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- Script points towards broadcast channel JS file -->
+    <!-- <script src="node_modules\broadcast-channel\dist\lib\browser.min.js"></script> -->
+
+    <!-- Script required for timestamps  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
+
+    <!-- Script required for alert popup  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/bowser@2.11.0/es5.js"></script>
+
+    <!-- Script points towards my JS file -->
+    <script src = "js/safari.js"></script>
+
+    <script>$('input').attr('autocomplete', 'off');</script>
+
+  </body>
+
+</html>

@@ -1,0 +1,655 @@
+/* Imports custom font */
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+/* @import url(https://fonts.cdnfonts.com/css/menlo); */
+
+/* Sets the font of the entire page, customizes background & ensures form is responsive */
+html, body {
+  font-family: montserrat, arial, verdana;
+  background: #C1E7E3;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+/* Ensures form is responsive */
+.wholecon {
+  display: flex;
+  top: 3%;
+}
+
+/* Customizes the form */
+#register {
+  /* Customizes the size of the form */
+  width: 650px;
+  /* Customizes the position of the form to be centered */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* Ensures title and button are centered */
+	text-align: center;
+}
+
+/* Customizes the form further */
+#register fieldset {
+  background: #FFFFFF;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	width: 85%;
+}
+
+/* Customizes "Create Your Account" header on top of the page */
+.header {
+  font-size: 18px;
+  text-transform: uppercase;
+	color: #2C3E50;
+	margin: 25px auto;
+  font-weight: bolder;
+}
+
+/* Customizes password manager info message on top of registration form */
+#topinfo {
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: left;
+  font-size: 12px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: rgba(199, 228, 240, 1);
+  border-color: rgba(173, 200, 212, 1);
+  color: rgba(69, 96, 106,1);
+}
+
+/* Customizes position of the text inside password manager info message */
+#topinfo p {
+  margin-top: -17px;
+  margin-left: 15px;
+  margin-bottom: 3px;
+}
+
+/* Ensures labels are positioned / formatted correctly*/
+.container {
+  width: 100%;
+}
+
+/* Customizes position & font size of labels*/
+label{
+  float: left;
+  margin-bottom: 5px;
+  font-size: small;
+}
+
+/* Customizes the input boxes */
+#register input[type=text], input[type=password] {
+  font-size: 16px;
+  color: #2C3E50;
+  border: 1px solid #CCCCCC;
+	border-radius: 3px;
+  outline: none;
+  width: 100%;
+  padding: 15px;
+	margin-bottom: 35px;
+}
+
+#usedrandom, #triedrandom {
+  display: none;
+}
+
+/* Faded random password in password & confirm password fields */
+.temporary, .temporary2 {
+  background-image: linear-gradient(90deg, #666546 50%, rgba(0,0,0,0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 40px;
+  margin-left: 15px;
+  font-size: 16px;
+  /* font-family: 'Menlo', sans-serif; */
+  font-family: Arial;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+  cursor: default;
+}
+
+/* Customizes the font of placeholder */
+input::placeholder {
+  font-family: arial;
+}
+
+/* Ensures everything is positioned correctly */
+*, *:before, *:after {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.infomark, .infomark2 {
+  background-image: linear-gradient(180deg, #000000 74%, rgba(0,0,0,0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0px;
+  margin-left: 65px;
+  font-size: 16px;
+  opacity: 0.8;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+  cursor: default;
+}
+
+.infomark2 {
+  margin-left: 122px;
+}
+
+/* Customizes "strong password" label */
+.stronglabel, .stronglabel2 {
+  background-image: linear-gradient(180deg, #000000 74%, rgba(0,0,0,0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 33px;
+  margin-right: 16px;
+  font-size: 16px;
+  opacity: 0.8;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+  cursor: default;
+}
+
+.errorlabel, .errorlabel2 {
+  background-image: linear-gradient(180deg, #000000 74%, rgba(0,0,0,0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 33px;
+  margin-right: 16px;
+  font-size: 16px;
+  opacity: 0.8;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+  cursor: default;
+}
+
+/* Modifies position and visbility of message box (password & confirm password fields) */
+.message, .message2 {
+  display: none;
+  width: 315px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: -335px;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
+  padding: 30px 20px 20px 30px;
+  border: 1px solid #CACBCC;
+  border-radius:10px;
+  background: rgb(213, 230, 230, 0.95);
+}
+
+/* Modifies position and visbility of message box's arrow pointer to password and confirm password fields */
+.message:before, .message2:before {
+  content: ' ';
+  width: 20px;
+  height: 20px;
+  background: rgb(213, 230, 230, 0.95);
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 25px;
+  margin-right: 303px;
+  transform: rotate(45deg);
+  border-left: 1px solid #CACBCC;
+  border-bottom: 1px solid #CACBCC;
+}
+
+/* Modifies position of message box's key (password and confirm password fields) */
+.messagekey, .messagekey2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 6px;
+  margin-left: 7px;
+  image-rendering: pixelated;
+}
+
+/* Modifies position of message box's title (password and confirm password fields) */
+.message h4, .message2 h4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 12px;
+  margin-left: 40px;
+  padding-right: 50px;
+  font-size: 13px;
+  text-align: left;
+  color: #404040;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-weight: 400;
+}
+
+/* Modifies position and specs of message box's thematic line (password and confirm password fields) */
+.message hr, .message2 hr {
+  top: 7px;
+  left: -30px;
+  width: 322px;
+  opacity: 40%;
+}
+
+/* Modifies position of message box's content (password and confirm password fields) */
+.message h2, .message2 h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 53px;
+  margin-left: 16px;
+  padding-right: 20px;
+  text-align: left;
+  line-height: 1.4;
+  font-size: 12.5px;
+  color: #586E70;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-weight: 400;
+}
+
+/* Modifies position of message box's button (password and confirm password fields) */
+.message #dontuse, .message2 #dontuse2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 30px;
+  margin-bottom: 15px;
+  /* top/bottom, right/left */
+  padding: 2px 8px;
+  border: none;
+  border-radius: 5px;
+  color: #404040;
+  background-color: rgb(190, 199, 197, 0.7);
+  font-size: 13px;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-weight: 400;
+}
+
+/* Modifies position of message box's button (password and confirm password fields) */
+.message #usestrong, .message2 #usestrong2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 80px;
+  margin-bottom: 15px;
+  /* top/bottom, right/left */
+  padding: 2px 8px;
+  border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #62BD69;
+  font-size: 13px;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-weight: 400;
+}
+
+.full-container, .full-container2 {
+  display: none;
+  z-index: 1;
+}
+
+/* Modifies position of both key and arrow icons (password field) */
+.normalcon, .normalcon2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -71px;
+  margin-right: 15px;
+  image-rendering: pixelated;
+}
+
+.hovercon, .hovercon2 {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -72px;
+  margin-right: 14px;
+  image-rendering: pixelated;
+}
+
+.yellowcon, .yellowcon2 {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -70px;
+  margin-right: 14px;
+  image-rendering: pixelated;
+}
+
+.hoveryellow, .hoveryellow2 {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -70px;
+  margin-right: 14px;
+  image-rendering: pixelated;
+}
+
+/* Modifies position of mini message (password and confirm password fields) */
+.minimessage, .minimessage2, .smallestmessage, .smallestmessage2 {
+  display: none;
+  position: absolute;
+  background-color: #EFEDF0;
+  top: 0;
+  left: 0;
+  margin-top: 77px;
+  margin-left: -8px;
+  z-index:1;
+  width: 59%;
+  height: 110px;
+  border: 1px solid #D5D2D5;
+  border-radius: 7px;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.smallestmessage, .smallestmessage2 {
+  width: 43%;
+}
+
+/* Modifies position of both buttons inside mini message */
+.mini-container, .mini-container2, .small-container, .small-container2 {
+  margin-top: 8px;
+  padding-left: 6px;
+}
+
+#fromweb, #fromweb2, #fromweb3, #fromweb4 {
+  display: block;
+  font-size: 13px;
+  width: 97.1%;
+  padding: 5px 8px;
+  background-color: #EFEDF0;
+  text-align: left;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+	color: #483E3F;
+  border: none;
+  border-radius: 4px;
+}
+
+.customdesc, .customdesc2, .customdesc3, .customdesc4 {
+  color: #5C5553;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-size: 13px;
+  position: fixed;
+  margin-top: -45px;
+  margin-left: 30px;
+}
+
+.fromdesc, .fromdesc2, .fromdesc3, .fromdesc4 {
+  color: #6E6362;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-size: 11px;
+  position: fixed;
+  margin-top: -25px;
+  margin-left: 30px;
+}
+
+.minimessage hr, .minimessage2 hr {
+  margin-top: 4px;
+  margin-left: 5px;
+  width: 265px;
+  opacity: 40%;
+}
+
+.smallestmessage hr, .smallestmessage2 hr {
+  margin-top: 4px;
+  margin-left: 7px;
+  width: 181px;
+  opacity: 40%;
+}
+
+/* Customizes password generator button appearance */
+#fillagain, #fillagain2, #fillagain3, #fillagain4 {
+  display: block;
+  margin-top: -5px;
+  font-size: 13px;
+  width: 97.1%;
+  padding: 2px 8px;
+  background-color: #EFEDF0;
+  text-align: left;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+	color: #483E3F;
+  border: none;
+  border-radius: 4px;
+}
+
+#fillagain:hover, #fillagain2:hover, #fillagain3:hover, #fillagain4:hover {
+  background: #009EFF;
+  color: #FFFFFF;
+}
+
+/* Displays snippet of random password */
+.snippetpass p, .snippetpass2 p {
+  position: fixed;
+  margin-top: -14px;
+  margin-left: 122px;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  font-size: 11.8px;
+}
+
+#otherbtn {
+  display: block;
+  margin-top: -1px;
+  font-size: 13px;
+  width: 97.1%;
+  padding: 2px 8px;
+  background-color: #EFEDF0;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+  text-align: left;
+	color: #483E3F;
+  border: none;
+  border-radius: 4px;
+}
+
+#otherbtn:hover {
+  background: #009EFF;
+  color: #FFFFFF;
+}
+
+/* Customizes position of bottom error message */
+.bottomerror {
+  position: absolute;
+  visibility: hidden;
+  font-size: 14px;
+  text-align: left;
+  margin-top: -30px;
+}
+
+/* Customizes appearance of input fields when bottom error message appears */
+#register .container.error input {
+  border-color: rgba(220, 53, 69, 1);
+}
+
+#register .container.neutral input {
+  border-color: none;
+}
+
+/* Customizes appearance of input fields when bottom error message disappers */
+#register .container.success input {
+  border-color: #00C234;
+}
+
+/* Customizes appearance of text displayed in bottom error message */
+#register .container.error small {
+  color: rgba(220, 53, 69, 1);
+  visibility: visible;
+}
+
+/* Customizes specs of the Register button */
+#register .Register {
+  padding: 10px;
+  width: 40%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #000;
+	background: #ddd;
+	border: none;
+	border-radius: 20px;
+  cursor: pointer;
+}
+
+/* When mouse hovers over Register button, it will lighten */
+#register .Register:hover {
+  background-color: #555;
+  color: white;
+}
+
+.overlay, .overlay2 {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(211, 211, 211);
+  background-color: rgba(211, 211, 211, 0.5);
+}
+
+/* User created password save pop-up */
+.user-save-field, .user-save-field2{
+  position: absolute;
+  top: 85px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 260px;
+  height: 325px;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3);
+  padding: 30px 18px 20px 18px;
+  border: 1px solid #D5D2D5;
+  border-radius: 12px;
+  color: #483E3F;
+  background-color: #EFEDF0;
+  /* font-family: -apple-system; */
+  font-family: Arial;
+}
+
+.user-save-field2 {
+  top: 110px;
+  height: 280px;
+}
+
+.safari-logo, .safari-logo2 {
+  margin-top: -10px;
+  image-rendering: pixelated;
+}
+
+.user-save-field h3, .user-save-field2 h3 {
+  color: #483E3F;
+  font-size: 13px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.user-save-field h4, .user-save-field2 h4 {
+  color: #483E3F;
+  margin: 0 0 15px 0;
+  font-weight: normal;
+  font-size: 11px;
+}
+
+.user-save, .user-save2 {
+  width: 100%;
+  margin: 3px 0 3px 0;
+  /* top right bottom left */
+  padding: 6px 0 6px 0;
+  color: #FFFFFF;
+  background: #4c8bf5;
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+}
+
+.user-never {
+  width: 100%;
+  margin: 3px 0 3px 0;
+  padding: 6px 0 6px 0;
+  color: #483E3F;
+  background-color: rgb(190, 199, 197, 0.7);
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+}
+
+.user-not-now, .user-not-now2 {
+  width: 100%;
+  margin: 15px 0 5px 0;
+  padding: 6px 0 6px 0;
+  color: #483E3F;
+  background-color: rgb(190, 199, 197, 0.7);
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+}
+
+.user-not-now2 {
+  margin-top: 3px;
+}
+
+/* Prevents autofill (targeting Safari) */
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+}
+
+/* Title of pop up message after submission */
+.swal-title {
+  font-size: 25px;
+}
+
+/* Text content of pop up message after submission */
+.swal-text, .swal-content {
+  display: block;
+  text-align: center;
+  color: #61534E;
+  font-size: 20px;
+  margin: 15px;
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!-- text direction is set to left to right -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="robots" content="noindex, nofollow">
+    <!-- Sets title of web tab -->
+    <title>Registration</title>
+    <!-- Password font is imported (thus applied) -->
+    <link rel="stylesheet" href="node_modules/text-security/text-security-disc.css" type="text/css">
+    <!-- Icons are imported (thus applied) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.0/css/all.min.css" />
+    <!-- Personal CSS is imported (thus applied) -->
+    <link rel="stylesheet" href="css/prototype1.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- style media="screen" allows us to specify what we want to do on different sized screens -->
+    <style media="screen"></style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+
+    <div class="wholecon">
+
+      <form class="" id="register" name="register" onsubmit="return final();" autocomplete="off" method="post" >
+
+        <fieldset>
+
+          <h2 class="header">Create your account</h2>
+
+          <!-- Displays info warning if required -->
+          <div id="topinfo"><i class="fa fa-info-circle" style='left:-5px;font-size:18px;'></i><p></p></div>
+
+          <!-- Email textfield -->
+          <div class="container">
+
+            <input name = "DummyUsername" type="text" style="display:none;">
+
+            <label><b>Email Address</b></label><br>
+            <input type="text" placeholder="Enter your email" class="email" id="email" name="email" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="min-height: 53px;">
+
+            <!-- Displays bottom error message towards email validation -->
+            <div class="bottomerror">
+              <small></small>
+            </div>
+
+          <!-- End of email textfield -->
+          </div>
+
+          <!-- Password textfield -->
+          <div class="container">
+
+            <input name = "DummyPassword" type="text" style="display:none;">
+
+            <label><b>Password</b></label><br>
+            <input type="text" placeholder="Enter your password" class="pass" id="pass" name="pass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
+
+            <p class="temporary" id="temporary"></p>
+
+            <!-- Displays strong password label -->
+            <p class="stronglabel">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159l-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6Z" clip-rule="evenodd"/></svg>
+            </p>
+
+            <p class="stronglabel3">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ff7f7f" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm1 6a1 1 0 1 0-2 0v6a1 1 0 1 0 2 0V7Zm0 9.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
+            </p>
+
+            <!-- Displays message box -->
+            <div class="message">
+
+              <div class="messagekey">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.8em" height="1.8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="#52696d"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856a.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533c.12.057.218.095.293.118a.55.55 0 0 0 .101.025a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118c.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453a7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625a11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43A62.456 62.456 0 0 1 5.072.56z"/><path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/></g></svg>
+              </div>
+
+              <h4>To increase your account's security a strong password is created for you.</h4>
+              <hr>
+              <h2>Join other users and be part of the secure movement by using a randomly generated password.</h2>
+
+              <button type="button" class="dontuse" id="dontuse" name="dontuse" value="dontuse">Risk vulnerabilities</button>
+              <button type="button" class="usestrong" id="usestrong" name="usestrong" value="usestrong">Protect my account</button>
+            </div>
+
+            <!-- Displays mini message box -->
+            <div class="minimessage">
+              <div class="mini-container">
+                <button type="button" class="fromweb" id="fromweb" name="fromweb" value="">
+                  <div class="minikey">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2.2em" height="2.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="#52696d" class="smallkey"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856a.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533c.12.057.218.095.293.118a.55.55 0 0 0 .101.025a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118c.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453a7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625a11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43A62.456 62.456 0 0 1 5.072.56z"/><path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
+                    </g>
+                  </svg>
+                  </div>
+                  <div class="customdesc"><p>Protect your account afterall?</p></div>
+                  <div class="fromdesc"><p>Join others and use the generated password</p></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Displays bottom error message towards password validation -->
+            <div class="bottomerror">
+              <small></small>
+            </div>
+
+          <!-- End of password textfield -->
+          </div>
+
+          <!-- Confirm Password textfield -->
+          <div class="container">
+
+            <input name = "DummyPassword2" type="text" style="display:none;">
+
+            <label><b>Confirm Password</b></label><br>
+            <input type="text" placeholder="Re-enter your password" class="cpass" id="cpass" name="cpass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
+
+            <p class="temporary2" id="temporary2"></p>
+
+            <!-- Displays strong password label2 -->
+            <p class="stronglabel2">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159l-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6Z" clip-rule="evenodd"/></svg>
+            </p>
+
+            <p class="stronglabel4">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ff7f7f" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm1 6a1 1 0 1 0-2 0v6a1 1 0 1 0 2 0V7Zm0 9.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
+            </p>
+
+            <!-- Displays message2 box -->
+            <div class="message2">
+
+              <div class="messagekey2">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.8em" height="1.8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="#52696d"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856a.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533c.12.057.218.095.293.118a.55.55 0 0 0 .101.025a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118c.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453a7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625a11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43A62.456 62.456 0 0 1 5.072.56z"/><path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/></g>
+                </svg>
+              </div>
+
+              <h4>To increase your account's security a strong password is created for you.</h4>
+              <hr>
+              <h2>Join other users and be part of the secure movement by using a randomly generated password.</h2>
+
+              <button type="button" class="dontuse2" id="dontuse2" name="dontuse2" value="dontuse">Risk vulnerabilities</button>
+              <button type="button" class="usestrong2" id="usestrong2" name="usestrong2" value="usestrong">Protect my account</button>
+
+            </div>
+
+            <!-- Displays mini message box -->
+            <div class="minimessage2">
+              <div class="mini-container2">
+                <button type="button" class="fromweb2" id="fromweb2" name="fromweb2" value="">
+                  <div class="minikey2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2.2em" height="2.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="#52696d" class="smallkey2"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856a.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533c.12.057.218.095.293.118a.55.55 0 0 0 .101.025a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118c.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453a7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625a11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43A62.456 62.456 0 0 1 5.072.56z"/><path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
+                    </g>
+                  </svg>
+                  </div>
+                  <div class="customdesc2"><p>Protect your account afterall?</p></div>
+                  <div class="fromdesc2"><p>Join others and use the generated password</p></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Displays bottom error message towards confirm password validation -->
+            <div class="bottomerror">
+              <small></small>
+            </div>
+
+          <!-- End of confirm password textfield -->
+          </div>
+
+          <input type="text" placeholder="" class="usedrandom" id="usedrandom" name="usedrandom" value="">
+          <input type="text" placeholder="" class="triedrandom" id="triedrandom" name="triedrandom" value="No">
+
+          <!-- Submit button -->
+          <button type="submit" class="Register" onclick="return checkValidation();">Register</button>
+
+        </fieldset>
+
+      </form>
+
+    </div>
+
+    <!-- Script required for alert popup  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <!-- Script points towards my JS file -->
+    <script src = "js/prototype1.js"></script>
+
+    <script>$('input').attr('autocomplete', 'off');</script>
+
+  </body>
+
+</html>
