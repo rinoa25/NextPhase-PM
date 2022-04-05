@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "text-security": "^3.2.1"
+  }
+}
