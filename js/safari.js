@@ -356,58 +356,34 @@ full2.addEventListener('mouseout', function() {
 
 // When user hovers over the biggest button in minimessage password field
 fromweb.addEventListener('mouseover', function() {
-  smallkey.style.fill = '#FFFFFF';
-  customdesc.style.color = '#FFFFFF';
-  fromdesc.style.color = '#FFFFFF';
-  fromweb.style.backgroundColor = '#009EFF';
+  fromweb.style.backgroundColor = '#E8E8E8';
 });
 // When user stops hovering over the biggest button in minimessage password field
 fromweb.addEventListener('mouseout', function() {
-  smallkey.style.fill = '#727071';
-  customdesc.style.color = '#5C5553';
-  fromdesc.style.color = '#6E6362';
-  fromweb.style.backgroundColor = '#EFEDF0';
+  fromweb.style.backgroundColor = '#FFFFFF';
 });
 
 // When user hovers over the biggest button in minimessage confirm password field
 fromweb2.addEventListener('mouseover', function() {
-  smallkey2.style.fill = '#FFFFFF';
-  customdesc2.style.color = '#FFFFFF';
-  fromdesc2.style.color = '#FFFFFF';
-  fromweb2.style.backgroundColor = '#009EFF';
+  fromweb2.style.backgroundColor = '#E8E8E8';
 });
 // When user stops hovering over the biggest button in minimessage confirm password field
 fromweb2.addEventListener('mouseout', function() {
-  smallkey2.style.fill = '#727071';
-  customdesc2.style.color = '#5C5553';
-  fromdesc2.style.color = '#6E6362';
-  fromweb2.style.backgroundColor = '#EFEDF0';
+  fromweb2.style.backgroundColor = '#FFFFFF';
 });
 
 fromweb3.addEventListener('mouseover', function() {
-  smallkey3.style.fill = '#FFFFFF';
-  customdesc3.style.color = '#FFFFFF';
-  fromdesc3.style.color = '#FFFFFF';
-  fromweb3.style.backgroundColor = '#009EFF';
+  fromweb3.style.backgroundColor = '#E8E8E8';
 });
 fromweb3.addEventListener('mouseout', function() {
-  smallkey3.style.fill = '#727071';
-  customdesc3.style.color = '#5C5553';
-  fromdesc3.style.color = '#6E6362';
-  fromweb3.style.backgroundColor = '#EFEDF0';
+  fromweb3.style.backgroundColor = '#FFFFFF';
 });
 
 fromweb4.addEventListener('mouseover', function() {
-  smallkey4.style.fill = '#FFFFFF';
-  customdesc4.style.color = '#FFFFFF';
-  fromdesc4.style.color = '#FFFFFF';
-  fromweb4.style.backgroundColor = '#009EFF';
+  fromweb4.style.backgroundColor = '#E8E8E8';
 });
 fromweb4.addEventListener('mouseout', function() {
-  smallkey4.style.fill = '#727071';
-  customdesc4.style.color = '#5C5553';
-  fromdesc4.style.color = '#6E6362';
-  fromweb4.style.backgroundColor = '#EFEDF0';
+  fromweb4.style.backgroundColor = '#FFFFFF';
 });
 
 function populate() {

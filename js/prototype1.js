@@ -147,32 +147,20 @@ var purple2  = true;
 
 // When user hovers over the biggest button in minimessage password field
 fromweb.addEventListener('mouseover', function() {
-  smallkey.style.fill = '#FFFFFF';
-  customdesc.style.color = '#FFFFFF';
-  fromdesc.style.color = '#FFFFFF';
-  fromweb.style.backgroundColor = '#009EFF';
+  fromweb.style.backgroundColor = '#E8E8E8';
 });
 // When user stops hovering over the biggest button in minimessage password field
 fromweb.addEventListener('mouseout', function() {
-  smallkey.style.fill = '#727071';
-  customdesc.style.color = '#5C5553';
-  fromdesc.style.color = '#6E6362';
-  fromweb.style.backgroundColor = '#EFEDF0';
+  fromweb.style.backgroundColor = '#FFFFFF';
 });
 
 // When user hovers over the biggest button in minimessage confirm password field
 fromweb2.addEventListener('mouseover', function() {
-  smallkey2.style.fill = '#FFFFFF';
-  customdesc2.style.color = '#FFFFFF';
-  fromdesc2.style.color = '#FFFFFF';
-  fromweb2.style.backgroundColor = '#009EFF';
+  fromweb2.style.backgroundColor = '#E8E8E8';
 });
 // When user stops hovering over the biggest button in minimessage confirm password field
 fromweb2.addEventListener('mouseout', function() {
-  smallkey2.style.fill = '#727071';
-  customdesc2.style.color = '#5C5553';
-  fromdesc2.style.color = '#6E6362';
-  fromweb2.style.backgroundColor = '#EFEDF0';
+  fromweb2.style.backgroundColor = '#FFFFFF';
 });
 
 function populate() {

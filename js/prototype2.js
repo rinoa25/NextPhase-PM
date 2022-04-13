@@ -18,11 +18,22 @@ var usestrong2 = document.querySelector(".usestrong2");
 var stronglabel = document.querySelector(".stronglabel");
 var stronglabel2 = document.querySelector(".stronglabel2");
 
+// Defines the red exclamation mark circle
 var errorlabel = document.querySelector(".errorlabel");
 var errorlabel2 = document.querySelector(".errorlabel2");
 
+// Defines the green question mark circle
 var infomark = document.querySelector(".infomark");
 var infomark2 = document.querySelector(".infomark2");
+
+// Defines the strength level of password
+var strengthlevel = document.getElementById('strengthlevel');
+var strengthlevel2 = document.getElementById('strengthlevel2');
+
+// Minimum 12 characters, at least one uppercase letter, one lowercase letter and one number: 3C12
+var correctform = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}$/;
+// At least one uppercase letter, one lowercase letter and one number
+var incompleteform = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/;
 
 // Defines the bottom error message variables
 var emailfield = document.getElementById('email');
@@ -39,6 +50,10 @@ var res;
 
 var state = false;
 
+// sweet alert hyperlink
+var el = document.createElement('div')
+el.innerHTML = "<img src='images/nudgeimage.png' style='width:100%;display:block;'>"
+
 // User goes back to their respective page.
 // They can't go back to a previous page they visited
 // They can't jump to a page they havent visited
@@ -47,7 +62,6 @@ var checkauthentication = sessionStorage.getItem('actualprocess');
 // replace with checkauthentication != null && checkauthentication == "registration.html")
 if (checkauthentication == null) {
   var textArray = [
-      '1C8',
       '3C12'
   ];
   var arrayPass = Math.floor(Math.random()*textArray.length);
@@ -75,6 +89,20 @@ if (checkauthentication == null) {
 $('body').bind('cut copy', function (e) {
   e.preventDefault();
 });
+
+function nudgedisplay() {
+  swal({title: "Don't get left behind!", content: el, text: "Users that used a randomly generated password are better protected than users who relied on their own password. The generated password will also be saved to your Google Chrome password manager, so you don't have to remember it.", closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "Remain at risk", catch: {text: "Protect my account"}}}).then((value) => {
+  switch (value) {
+    case "catch":
+     populate();
+     break;
+
+   default:
+     revert();
+     break;
+  }
+});
+}
 
 // Generates random passwords that meet required policy
 // at least 1 number, 1 upper case character, and 1 lower case character
@@ -183,6 +211,7 @@ function revert() {
 // If user tries to paste a external source to the password field
 elPassword.addEventListener('paste', function() {
   sessionStorage.setItem('pasted', 'yes');
+
 });
 
 elEmail.addEventListener('input', function() {
@@ -193,6 +222,9 @@ elEmail.addEventListener('input', function() {
 elPassword.addEventListener('input', function() {
   setNeutralFor(passwordfield);
   passwordfield.style.backgroundColor = "#FFFFFF";
+  if (passwordfield.value == 0) {
+    sessionStorage.removeItem('pasted');
+  }
 });
 
 elConfirm.addEventListener('input', function() {
@@ -217,11 +249,57 @@ elPassword.addEventListener('change', function() {
   }
   // field are white
   else {
-    message2.style.display = 'none';
-    errorlabel2.style.display = 'none';
 
-    message.style.display = 'block';
-    errorlabel.style.display = 'block';
+    // message2.style.display = 'none';
+    // errorlabel2.style.display = 'none';
+
+    // message.style.display = 'block';
+    // errorlabel.style.display = 'block';
+
+    // user assumingly used their own randomly generated password that is at least 3C12
+    if (correctform.test(passwordfield.value) && sessionStorage.getItem('pasted') == 'yes') {
+      message2.style.display = 'none';
+      errorlabel2.style.display = 'none';
+
+      message.style.display = 'none';
+      errorlabel.style.display = 'none';
+
+    }
+    // user assumingly used their own randomly generated password that doesn't meet 3C12
+    else if (correctform.test(passwordfield.value) == false && sessionStorage.getItem('pasted') == 'yes') {
+      strengthlevel.style.color = '#d6b85a';
+      strengthlevel.innerText = 'could be improved';
+
+      message2.style.display = 'none';
+      errorlabel2.style.display = 'none';
+
+      message.style.display = 'block';
+      errorlabel.style.display = 'block';
+
+    }
+    // person assumingly came up with their own password that is at least 3C12
+    else if (correctform.test(passwordfield.value) && sessionStorage.getItem('pasted') == null)  {
+      strengthlevel.style.color = '#d6b85a';
+      strengthlevel.innerText = 'could be improved';
+
+      message2.style.display = 'none';
+      errorlabel2.style.display = 'none';
+
+      message.style.display = 'block';
+      errorlabel.style.display = 'block';
+    }
+    // password that doesn't meet 3C12
+    else {
+      strengthlevel.style.color = '#ff7f7f';
+      strengthlevel.innerText = 'is weak and vulnerable';
+
+      message2.style.display = 'none';
+      errorlabel2.style.display = 'none';
+
+      message.style.display = 'block';
+      errorlabel.style.display = 'block';
+    }
+
   }
 });
 
@@ -234,11 +312,56 @@ elConfirm.addEventListener('change', function() {
   }
   // field are white
   else {
-    message.style.display = 'none';
-    errorlabel.style.display = 'none';
+    // message.style.display = 'none';
+    // errorlabel.style.display = 'none';
 
-    message2.style.display = 'block';
-    errorlabel2.style.display = 'block';
+    // message2.style.display = 'block';
+    // errorlabel2.style.display = 'block';
+
+    // user assumingly used their own randomly generated password that is at least 3C12
+    if (correctform.test(cpasswordfield.value) && sessionStorage.getItem('pasted') == 'yes') {
+      message.style.display = 'none';
+      errorlabel.style.display = 'none';
+
+      message2.style.display = 'none';
+      errorlabel2.style.display = 'none';
+
+    }
+    // user assumingly used their own randomly generated password that doesn't meet 3C12
+    else if (correctform.test(cpasswordfield.value) == false && sessionStorage.getItem('pasted') == 'yes') {
+      strengthlevel2.style.color = '#d6b85a';
+      strengthlevel2.innerText = 'could be improved';
+
+      message.style.display = 'none';
+      errorlabel.style.display = 'none';
+
+      message2.style.display = 'block';
+      errorlabel2.style.display = 'block';
+
+    }
+    // person assumingly came up with their own password that meets password policy
+    else if (correctform.test(cpasswordfield.value) && sessionStorage.getItem('pasted') == null)  {
+      strengthlevel2.style.color = '#d6b85a';
+      strengthlevel2.innerText = 'could be improved';
+
+      message.style.display = 'none';
+      errorlabel.style.display = 'none';
+
+      message2.style.display = 'block';
+      errorlabel2.style.display = 'block';
+    }
+    // password that doesn't meet 3C12
+    else {
+      strengthlevel2.style.color = '#ff7f7f';
+      strengthlevel2.innerText = 'is weak and vulnerable';
+
+      message.style.display = 'none';
+      errorlabel.style.display = 'none';
+
+      message2.style.display = 'block';
+      errorlabel2.style.display = 'block';
+    }
+
   }
 });
 
@@ -251,31 +374,11 @@ errorlabel2.onmousedown = function () {
 }
 
 infomark.onmousedown = function () {
-  swal({title: "Don't get left behind and secure your account!", text: "Users that used the randomly generated password are better protected than users who relied on their own password.", icon:"info",closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "I'll take the risks", catch: {text: "Protect my account"}}}).then((value) => {
-  switch (value) {
-    case "catch":
-     populate();
-     break;
-
-   default:
-     revert();
-     break;
-  }
-});
+  nudgedisplay();
 }
 
 infomark2.onmousedown = function () {
-  swal({title: "Don't get left behind and secure your account!", text: "Users that used the randomly generated password are better protected than users who relied on their own password.", icon:"info",closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "I'll take the risks", catch: {text: "Protect my account"}}}).then((value) => {
-  switch (value) {
-    case "catch":
-     populate();
-     break;
-
-   default:
-     revert();
-     break;
-  }
-});
+  nudgedisplay();
 }
 
 // Make sure message disappears when user clicks on password field again
@@ -303,17 +406,7 @@ usestrong.addEventListener('mousedown', function () {
   document.getElementById("triedrandom").value = "Yes";
   sessionStorage.setItem('triedrandom', "yes");
   message.style.display = 'none';
-  swal({title: "Don't get left behind and secure your account!", text: "Users that used the randomly generated password are better protected than users who relied on their own password.", icon:"info",closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "I'll take the risks", catch: {text: "Protect my account"}}}).then((value) => {
-  switch (value) {
-    case "catch":
-     populate();
-     break;
-
-   default:
-     revert();
-     break;
-  }
-});
+  nudgedisplay();
 });
 
 // These actions will happen when the usestrong button is clicked (CONFIRM PASSWORD FIELD)
@@ -321,17 +414,7 @@ usestrong2.addEventListener('mousedown', function () {
   document.getElementById("triedrandom").value = "Yes";
   sessionStorage.setItem('triedrandom', "yes");
   message2.style.display = 'none';
-  swal({title: "Don't get left behind and secure your account!", text: "Users that used the randomly generated password are better protected than users who relied on their own password.", icon:"info",closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "I'll take the risks", catch: {text: "Protect my account"}}}).then((value) => {
-  switch (value) {
-    case "catch":
-     populate();
-     break;
-
-   default:
-     revert();
-     break;
-  }
-});
+  nudgedisplay();
 });
 
 function nextpage() {
@@ -362,11 +445,6 @@ function final() {
   event.preventDefault();
 
 }
-
-// Minimum 12 characters, at least one uppercase letter, one lowercase letter and one number:
-var correctform = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}$/;
-// At least one uppercase letter, one lowercase letter and one number
-var incompleteform = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/;
 
 if (sessionStorage.getItem('passpolicy') == '1C8') {
   var actualpass = document.getElementById('topinfo');
