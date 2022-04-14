@@ -3,13 +3,6 @@ var elEmail = document.querySelector(".email");
 var elPassword = document.querySelector(".pass");
 var elConfirm = document.querySelector(".cpass");
 
-// Defines the timestamp variables
-moment.tz.add('America/Toronto|EST EDT EWT EPT|50 40 40 40|01010101010101010101010101010101010101010101012301010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010|-25TR0 1in0 11Wu 1nzu 1fD0 WJ0 1wr0 Nb0 1Ap0 On0 1zd0 On0 1wp0 TX0 1tB0 TX0 1tB0 TX0 1tB0 WL0 1qN0 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1qN0 WL0 1qN0 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1qN0 WL0 1qN0 4kM0 8x40 iv0 1o10 11z0 1nX0 11z0 1o10 11z0 1o10 1qL0 11D0 1nX0 11B0 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1qN0 11z0 1o10 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1fz0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1fz0 1a10 1fz0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1fz0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1fz0 1a10 1fz0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 1cN0 1fz0 1a10 1fz0 1cN0 1cL0 1cN0 1cL0 1cN0 1cL0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|65e5');
-var myTimezone = "America/Toronto";
-var myDatetimeFormat= "YYYY-MM-DD HH:mm:ss z";
-var myDatetimeFormat2 = "YYYY-MM-DD HH:mm:ss:SSS z";
-var myDatetimeString = moment().tz(myTimezone).format(myDatetimeFormat);
-
 // Register button
 var elRegister = document.querySelector(".Register");
 
@@ -107,14 +100,15 @@ var count = 0;
 // Detecting browser name
 var result = bowser.getParser(window.navigator.userAgent);
 var name = result.getBrowserName();
-
-// Detecting browser version
-var version = result.getBrowserVersion();
-var ver = parseInt(version);
+var nam = name.toLowerCase();
 
 // Detecting platform type (Desktop / mobile)
 var platform = result.getPlatformType();
 var plat = platform.toLowerCase();
+
+// Detecting browser version
+var version = result.getBrowserVersion();
+var ver = parseInt(version);
 
 // User inactive timer
 var myTimer;
@@ -128,50 +122,49 @@ function sessionOut() {
   swal({title: "Session Timeout", text: "You have been inactive for more than 10 minutes, you will be redirected back to the start of the study.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://ctrl9034.durhamfresh.online/");});
 }
 
-// // user using mobile
-// if (plat == "mobile") {
-//   swal({title: "Error", text: "You are currently on a " + plat + " device. Please use a desktop to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
-// }
-// else {
-//   // if browser is not safari
-//   if (name.toLowerCase().indexOf("safari") == -1) {
-//     // Checks for correct browser name. Ideally redirects them back to the recruitment post
-//     // redirects them back to mturk homepage for now since idk the recruitment post link
-//     swal({title: "Error", text: "You are currently using " + name + ". Please use Safari to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
-//   }
-//   // browser is safari but not latest stable version
-//   else {
-//     if (ver < 14) {
-//       swal({title: "Error", content: el, icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
-//     }
-//     else {
-//       document.addEventListener("visibilitychange", function() {
-//         // page out of sight
-//         if (document.visibilityState === 'hidden') {
-//           // then clear storage and show popup after
-//           // myTimer = setTimeout(function(){sessionStorage.clear(); sessionOut();}, 600000);
-//           localStorage.setItem('setupTime', new Date().getTime());
-//         }
-//         // else {
-//         //   clearTimeout(myTimer);
-//         // }
-//       });
-//       // var bc = new BroadcastChannel("my-awesome-site");
-//       // bc.onmessage = (event) => {
-//       //   if (event.data === "Am I the first?") {
-//       //     bc.postMessage(`No you're not.`);
-//       //     // alert("Another tab of this site just got opened");
-//       //   }
-//       //   if (event.data === `No you're not.`) {
-//       //     // You currently have another session open in another tab / window.
-//       //     swal({title: "Error: Multiple Sessions", text: "You are only allowed to have one session at a time. To continue the study, close the extra sessions and refresh the inital session.", icon:"error",closeOnClickOutside: false, closeOnEsc: false, buttons: false});
-//       //     //alert("An instance of this site is already running");
-//       //   }
-//       // };
-//       // bc.postMessage('Am I the first?');
-//     }
-//   }
-// }
+// user using mobile
+if (plat == "mobile") {
+  swal({title: "Error", text: "You are currently on a " + plat + " device. Please use a desktop to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+}
+else {
+  // if browser is not chrome
+  if (name.toLowerCase().indexOf("chrome") == -1) {
+    // Checks for correct browser name. Ideally redirects them back to the recruitment post
+    // redirects them back to mturk homepage for now since idk the recruitment post link
+    swal({title: "Error", text: "You are currently using " + name + ". Please use Chrome to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+  }
+  // browser is chrome but not latest stable version
+  else {
+    if (ver < 95) {
+      swal({title: "Error", content: el, icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+    }
+    else {
+      document.addEventListener("visibilitychange", function() {
+        // page out of sight
+        if (document.visibilityState === 'hidden') {
+          // then clear storage and show popup after
+          // myTimer = setTimeout(function(){sessionStorage.clear(); localStorage.clear(); sessionOut();}, 600000);
+          localStorage.setItem('setupTime', new Date().getTime());
+        }
+        // else {
+        //   clearTimeout(myTimer);
+        // }
+      });
+      var bc = new BroadcastChannel("my-awesome-site");
+      bc.onmessage = (event) => {
+        if (event.data === "Am I the first?") {
+          bc.postMessage(`No you're not.`);
+          // alert("Another tab of this site just got opened");
+        }
+        if (event.data === `No you're not.`) {
+          swal({title: "Error: Multiple Sessions", text: "You are only allowed to have one session at a time. To continue the study, close the extra sessions and refresh the inital session.", icon:"error",closeOnClickOutside: false, closeOnEsc: false, buttons: false});
+          //alert("An instance of this site is already running");
+        }
+      };
+      bc.postMessage('Am I the first?');
+    }
+  }
+}
 
 // Checks if user restored page too late (10 minutes)
 var now = new Date().getTime();
@@ -190,71 +183,46 @@ window.addEventListener( "pageshow", function ( event ) {
   }
 });
 
-// User goes back to their respective page.
-// They can't go back to a previous page they visited
-// They can't jump to a page they havent visited
-var checkauthentication = sessionStorage.getItem('actualprocess');
-// if (checkauthentication == null) {
-//   window.location.replace("https://ctrl9034.durhamfresh.online/");
-// }
-// else if (checkauthentication != null && checkauthentication != "registration.html") {
-//   window.location.replace(sessionStorage.getItem('actualprocess'));
-// }
+var textArray = ['1C8', '3C12'];
+var arrayPass = Math.floor(Math.random()*textArray.length);
 
-// should have an else in front of  if
-// replace with checkauthentication != null && checkauthentication == "registration.html")
-if (checkauthentication == null) {
-  // once page loaded, timestamp is generated
-  var timestamp1 = sessionStorage.getItem('FirstTimestamp');
-  if (timestamp1 == null) {
-      sessionStorage.setItem('FirstTimestamp', myDatetimeString);
-  }
+if (sessionStorage.getItem('passpolicy') == null) {
+  sessionStorage.setItem('passpolicy', textArray[arrayPass]);
+}
 
-  var textArray = [
-      '1C8',
-      '3C12'
-  ];
-  var arrayPass = Math.floor(Math.random()*textArray.length);
+// once page loaded, password is generated
+var retVal = sessionStorage.getItem('randomPass');
+if (retVal == null) {
+    retVal  = genrandom();
+    sessionStorage.setItem('randomPass', retVal);
+}
 
-  if (sessionStorage.getItem('passpolicy') == null) {
-    sessionStorage.setItem('passpolicy', textArray[arrayPass]);
-  }
+// show password snippet on password and confirm password fields
+setPhrase(retVal);
+setPhrase2(retVal);
 
-  // once page loaded, password is generated
-  var retVal = sessionStorage.getItem('randomPass');
-  if (retVal == null) {
-      retVal  = genrandom();
-      sessionStorage.setItem('randomPass', retVal);
-  }
+var savedpass = sessionStorage.getItem('SavedPass');
+if (savedpass == null) {
+    savedpass  = retVal;
+    sessionStorage.setItem('SavedPass', savedpass);
+}
 
-  // show password snippet on password and confirm password fields
-  setPhrase(retVal);
-  setPhrase2(retVal);
+// once page loaded, name is decided
+var customname = sessionStorage.getItem('descname');
+if (customname == null) {
+    customname  = "Password saved today";
+    sessionStorage.setItem('descname', customname);
+}
 
-  var savedpass = sessionStorage.getItem('SavedPass');
-  if (savedpass == null) {
-      savedpass  = retVal;
-      sessionStorage.setItem('SavedPass', savedpass);
-  }
+setName(sessionStorage.getItem('descname'));
+setName2(sessionStorage.getItem('descname'));
+setName3(sessionStorage.getItem('descname'));
+setName4(sessionStorage.getItem('descname'));
 
-  // once page loaded, name is decided
-  var customname = sessionStorage.getItem('descname');
-  if (customname == null) {
-      customname  = "Password saved today";
-      sessionStorage.setItem('descname', customname);
-  }
-
-  setName(sessionStorage.getItem('descname'));
-  setName2(sessionStorage.getItem('descname'));
-  setName3(sessionStorage.getItem('descname'));
-  setName4(sessionStorage.getItem('descname'));
-
-  var counting = sessionStorage.getItem('countime');
-  if (counting == null) {
-    counting = "1";
-    sessionStorage.setItem('countime', counting);
-  }
-
+var counting = sessionStorage.getItem('countime');
+if (counting == null) {
+  counting = "1";
+  sessionStorage.setItem('countime', counting);
 }
 
 // User not able to copy / cut anything from the page
@@ -387,18 +355,6 @@ fromweb4.addEventListener('mouseout', function() {
 });
 
 function populate() {
-  var messageDisplayed = sessionStorage.getItem('messageDisplayed');
-  if (messageDisplayed == null) {
-      sessionStorage.setItem('messageDisplayed', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
-
-  var userIdle = sessionStorage.getItem('useridle');
-  // if (userIdle == null && emailfield.value != "") {
-  //   sessionStorage.setItem('useridle', moment().tz(myTimezone).format(myDatetimeFormat2));
-  // }
-  if (userIdle == null) {
-    sessionStorage.setItem('useridle', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
 
   setNeutralFor(passwordfield);
   setNeutralFor(cpasswordfield);
@@ -431,10 +387,6 @@ function populate() {
 }
 
 function revert() {
-  var messageIgnored = sessionStorage.getItem('messageIgnored');
-  if (messageIgnored == null) {
-      sessionStorage.setItem('messageIgnored', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
 
   // Text inside password and confirm password fields are no longer invisible, and fields are cleared
   passwordfield.style.color = '#2C3E50';
@@ -505,10 +457,6 @@ function nameplace() {
 // If user tries to paste a external source to the password field
 elPassword.addEventListener('paste', function() {
   sessionStorage.setItem('pasted', 'yes');
-  var messageIgnored = sessionStorage.getItem('messageIgnored');
-  if (messageIgnored == null) {
-      sessionStorage.setItem('messageIgnored', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
 });
 
 elEmail.addEventListener('input', function() {
@@ -525,16 +473,6 @@ elPassword.addEventListener('input', function() {
   passwordfield.style.backgroundColor = "#FFFFFF";
   minimessage.style.display = 'none';
   smallest.style.display = 'none';
-});
-
-elPassword.addEventListener('change', function() {
-  var userIdle = sessionStorage.getItem('useridle');
-  // if (userIdle == null && emailfield.value != "") {
-  //   sessionStorage.setItem('useridle', moment().tz(myTimezone).format(myDatetimeFormat2));
-  // }
-  if (userIdle == null) {
-    sessionStorage.setItem('useridle', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
 });
 
 elConfirm.addEventListener('input', function() {
@@ -816,10 +754,6 @@ dontuse2.addEventListener('mousedown', function () {
 
 // These actions will happen when the usestrong button is clicked (PASSWORD FIELD)
 usestrong.addEventListener('mousedown', function () {
-  var messageClicked = sessionStorage.getItem('messageClicked');
-  if (messageClicked == null) {
-      sessionStorage.setItem('messageClicked', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
   document.getElementById("triedrandom").value = "Yes";
   sessionStorage.setItem('triedrandom', "yes");
   message.style.display = 'none';
@@ -827,10 +761,6 @@ usestrong.addEventListener('mousedown', function () {
 
 // These actions will happen when the usestrong button is clicked (CONFIRM PASSWORD FIELD)
 usestrong2.addEventListener('mousedown', function () {
-  var messageClicked = sessionStorage.getItem('messageClicked');
-  if (messageClicked == null) {
-      sessionStorage.setItem('messageClicked', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
   pink = false;
   document.getElementById("triedrandom").value = "Yes";
   sessionStorage.setItem('triedrandom', "yes");
@@ -898,10 +828,6 @@ fillagain.addEventListener('mousedown', function () {
   sessionStorage.setItem('triedrandom', "yes");
   minimessage.style.display = 'none';
   full.style.display = 'none';
-  var messageClicked = sessionStorage.getItem('messageClicked');
-  if (messageClicked == null) {
-      sessionStorage.setItem('messageClicked', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
   populate();
 });
 
@@ -913,10 +839,6 @@ fillagain2.addEventListener('mousedown', function () {
   sessionStorage.setItem('triedrandom', "yes");
   minimessage2.style.display = 'none';
   full2.style.display = 'none';
-  var messageClicked = sessionStorage.getItem('messageClicked');
-  if (messageClicked == null) {
-      sessionStorage.setItem('messageClicked', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
   populate();
 });
 
@@ -967,57 +889,9 @@ fillagain4.addEventListener('mousedown', function () {
   event.preventDefault();
 });
 
-function checkIdle() {
-  var incompleteTime = moment(sessionStorage.getItem('userconfirmed'),"YYYY-MM-DD HH:mm:ss:SSS").diff(moment(sessionStorage.getItem('useridle'),"YYYY-MM-DD HH:mm:ss:SSS"));
-  var idleDuration = moment.duration(incompleteTime);
-  var idleFinal = moment.utc(incompleteTime).format("mm:ss:SSS");
-  sessionStorage.setItem('idleTime', idleFinal);
-}
-
-// The amount of time ppl take to make a decision of either clicking on the suggestion or typing their own password
-function checkDecisionTime() {
-  var didntIgnore = moment(sessionStorage.getItem('messageClicked'),"YYYY-MM-DD HH:mm:ss:SSS").diff(moment(sessionStorage.getItem('messageDisplayed'),"YYYY-MM-DD HH:mm:ss:SSS"));
-  var didntIgnoreDuration = moment.duration(didntIgnore);
-  var didntIgnoreFinal = moment.utc(didntIgnore).format("mm:ss:SSS");
-
-  var ignored = moment(sessionStorage.getItem('messageIgnored'),"YYYY-MM-DD HH:mm:ss:SSS").diff(moment(sessionStorage.getItem('messageDisplayed'),"YYYY-MM-DD HH:mm:ss:SSS"));
-  var ignoredDuration = moment.duration(ignored);
-  var ignoredFinal = moment.utc(ignored).format("mm:ss:SSS");
-
-  // User didn't click the message at all, typed their own password only
-  if (didntIgnoreFinal == 'NaNInvalid date') {
-    sessionStorage.setItem("decisionTime", ignoredFinal);
-    sessionStorage.setItem("decision", "typed their own password");
-    sessionStorage.setItem('messageClicked', 'n/a');
-  }
-  // User didn't bother typing their own password, only clicked the suggestion
-  else if (ignoredFinal == 'NaNInvalid date') {
-    sessionStorage.setItem("decisionTime", didntIgnoreFinal);
-    sessionStorage.setItem("decision", "clicked on the suggestion");
-    sessionStorage.setItem('messageIgnored', 'n/a');
-  }
-
-  // User did both, now we want to see which they did first
-
-  // User clicked the message instead of ignoring it
-  else if (didntIgnoreFinal < ignoredFinal) {
-    sessionStorage.setItem("decisionTime", didntIgnoreFinal);
-    sessionStorage.setItem("decision", "clicked on the suggestion");
-  }
-  // User typed their own password  instead of clicking the message
-  else {
-    sessionStorage.setItem("decisionTime", ignoredFinal);
-    sessionStorage.setItem("decision", "typed their own password");
-  }
-}
-
 function nextpage() {
   sessionStorage.clear();
-  checkIdle();
-  checkDecisionTime();
-  // sessionStorage.setItem('actualprocess', "questionnaire.html");
-  sessionStorage.setItem('SecondTimestamp', moment().tz(myTimezone).format(myDatetimeFormat));
-  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("registration.html");});
+  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("safari.html");});
   return true;
 }
 
@@ -1097,10 +971,6 @@ if (sessionStorage.getItem('passpolicy') == '3C12') {
 }
 
 function completed() {
-  var messageClicked = sessionStorage.getItem('messageClicked');
-  if (messageClicked == null && sessionStorage.getItem('messageIgnored') == null) {
-      sessionStorage.setItem('messageClicked', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
   count = 1;
   setSuccessFor(emailfield);
   setSuccessFor(passwordfield);
@@ -1121,10 +991,6 @@ function checkValidation() {
   var emailValue = emailfield.value.trim();
   var passValue = passwordfield.value.trim();
   var passValue2 = cpasswordfield.value.trim();
-
-  if (sessionStorage.getItem('useridle') != null) {
-    sessionStorage.setItem('userconfirmed', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
 
   // Scenario that user uses random password
   if (isEmail(emailValue) && passValue == retVal && passValue == passValue2 && passValue != "") {

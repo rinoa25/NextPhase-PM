@@ -11,9 +11,8 @@ html, body {
 }
 
 /* Ensures form is responsive */
-.wholecon {
+body {
   display: flex;
-  top: 3%;
 }
 
 /* Customizes the form */

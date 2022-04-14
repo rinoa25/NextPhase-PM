@@ -6,14 +6,6 @@ var elConfirm = document.querySelector(".cpass");
 // Register button
 var elRegister = document.querySelector(".Register");
 
-// Defines save prompt message beside password and confirm password fields
-var message = document.querySelector(".message");
-var message2 = document.querySelector(".message2");
-
-// Defines usestrong button for password and confirm password fields
-var usestrong = document.querySelector(".usestrong");
-var usestrong2 = document.querySelector(".usestrong2");
-
 // Defines strong label on password and confirm password fields
 var stronglabel = document.querySelector(".stronglabel");
 var stronglabel2 = document.querySelector(".stronglabel2");
@@ -25,10 +17,6 @@ var errorlabel2 = document.querySelector(".errorlabel2");
 // Defines the green question mark circle
 var infomark = document.querySelector(".infomark");
 var infomark2 = document.querySelector(".infomark2");
-
-// Defines the strength level of password
-var strengthlevel = document.getElementById('strengthlevel');
-var strengthlevel2 = document.getElementById('strengthlevel2');
 
 // Minimum 12 characters, at least one uppercase letter, one lowercase letter and one number: 3C12
 var correctform = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}$/;
@@ -54,35 +42,105 @@ var state = false;
 var el = document.createElement('div')
 el.innerHTML = "<img src='images/nudgeimage.png' style='width:100%;display:block;'>"
 
-// User goes back to their respective page.
-// They can't go back to a previous page they visited
-// They can't jump to a page they havent visited
-var checkauthentication = sessionStorage.getItem('actualprocess');
-// should have an else in front of  if
-// replace with checkauthentication != null && checkauthentication == "registration.html")
-if (checkauthentication == null) {
-  var textArray = [
-      '3C12'
-  ];
-  var arrayPass = Math.floor(Math.random()*textArray.length);
+// Detecting browser name
+var result = bowser.getParser(window.navigator.userAgent);
+var name = result.getBrowserName();
+var nam = name.toLowerCase();
 
-  if (sessionStorage.getItem('passpolicy') == null) {
-    sessionStorage.setItem('passpolicy', textArray[arrayPass]);
+// Detecting platform type (Desktop / mobile)
+var platform = result.getPlatformType();
+var plat = platform.toLowerCase();
+
+// Detecting browser version
+var version = result.getBrowserVersion();
+var ver = parseInt(version);
+
+// User inactive timer
+var myTimer;
+var minutes = 10;
+
+var nudgecount = 0;
+
+// user using mobile
+if (plat == "mobile") {
+  swal({title: "Error", text: "You are currently on a " + plat + " device. Please use a desktop to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+}
+else {
+  // if browser is not chrome
+  if (name.toLowerCase().indexOf("chrome") == -1) {
+    // Checks for correct browser name. Ideally redirects them back to the recruitment post
+    // redirects them back to mturk homepage for now since idk the recruitment post link
+    swal({title: "Error", text: "You are currently using " + name + ". Please use Chrome to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
   }
-
-  // once page loaded, password is generated
-  var retVal = sessionStorage.getItem('randomPass');
-  if (retVal == null) {
-      retVal  = genrandom();
-      sessionStorage.setItem('randomPass', retVal);
+  // browser is chrome but not latest stable version
+  else {
+    if (ver < 95) {
+      swal({title: "Error", content: el, icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+    }
+    else {
+      document.addEventListener("visibilitychange", function() {
+        // page out of sight
+        if (document.visibilityState === 'hidden') {
+          // then clear storage and show popup after
+          // myTimer = setTimeout(function(){sessionStorage.clear(); localStorage.clear(); sessionOut();}, 600000);
+          localStorage.setItem('setupTime', new Date().getTime());
+        }
+        // else {
+        //   clearTimeout(myTimer);
+        // }
+      });
+      var bc = new BroadcastChannel("my-awesome-site");
+      bc.onmessage = (event) => {
+        if (event.data === "Am I the first?") {
+          bc.postMessage(`No you're not.`);
+          // alert("Another tab of this site just got opened");
+        }
+        if (event.data === `No you're not.`) {
+          swal({title: "Error: Multiple Sessions", text: "You are only allowed to have one session at a time. To continue the study, close the extra sessions and refresh the inital session.", icon:"error",closeOnClickOutside: false, closeOnEsc: false, buttons: false});
+          //alert("An instance of this site is already running");
+        }
+      };
+      bc.postMessage('Am I the first?');
+    }
   }
+}
 
-  var savedpass = sessionStorage.getItem('SavedPass');
-  if (savedpass == null) {
-      savedpass  = retVal;
-      sessionStorage.setItem('SavedPass', savedpass);
+// Checks if user restored page too late (10 minutes)
+var now = new Date().getTime();
+var setupTime = localStorage.getItem('setupTime');
+if (setupTime != null) {
+  if (now-setupTime > minutes * 60 * 1000) {
+    localStorage.clear();
+    sessionStorage.clear();
   }
+}
 
+window.addEventListener( "pageshow", function ( event ) {
+  var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+  if ( historyTraversal ) {
+    // Handle page restore.
+    window.location.reload(true);
+  }
+});
+
+var textArray = ['1C8', '3C12'];
+var arrayPass = Math.floor(Math.random()*textArray.length);
+
+if (sessionStorage.getItem('passpolicy') == null) {
+  sessionStorage.setItem('passpolicy', textArray[arrayPass]);
+}
+
+// once page loaded, password is generated
+var retVal = sessionStorage.getItem('randomPass');
+if (retVal == null) {
+    retVal  = genrandom();
+    sessionStorage.setItem('randomPass', retVal);
+}
+
+var savedpass = sessionStorage.getItem('SavedPass');
+if (savedpass == null) {
+    savedpass  = retVal;
+    sessionStorage.setItem('SavedPass', savedpass);
 }
 
 // User not able to copy / cut anything from the page
@@ -91,13 +149,15 @@ $('body').bind('cut copy', function (e) {
 });
 
 function nudgedisplay() {
-  swal({title: "Don't get left behind!", content: el, text: "Users that used a randomly generated password are better protected than users who relied on their own password. The generated password will also be saved to your Google Chrome password manager, so you don't have to remember it.", closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "Remain at risk", catch: {text: "Protect my account"}}}).then((value) => {
+  swal({title: "Secure your account, don't get left behind!", content: el, text: "Users that used a randomly generated password are better protected than users who relied on their own password. The generated password will also be saved to your Google Chrome password manager, so you don't have to remember it.", closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "Remain at risk", catch: {text: "Protect my account"}}}).then((value) => {
   switch (value) {
     case "catch":
      populate();
      break;
 
    default:
+     errorlabel.style.display = 'block';
+     errorlabel2.style.display = 'block';
      revert();
      break;
   }
@@ -139,11 +199,9 @@ function genrandom() {
 function populate() {
   state = true;
 
-  message.style.display = 'none';
   errorlabel.style.display = 'none';
   infomark.style.display = 'block';
 
-  message2.style.display = 'none';
   errorlabel2.style.display = 'none';
   infomark2.style.display = 'block';
 
@@ -178,6 +236,12 @@ function populate() {
 }
 
 function revert() {
+
+  if (state == true) {
+    passwordfield.value = "";
+    cpasswordfield.value = "";
+  }
+  
   // Text inside password and confirm password fields are no longer invisible, and fields are cleared
   state = false;
 
@@ -190,8 +254,6 @@ function revert() {
   cpasswordfield.style.WebkitUserSelect = "text";
   passwordfield.style.cursor = 'text';
   cpasswordfield.style.cursor = 'text';
-  passwordfield.value = "";
-  cpasswordfield.value = "";
 
   // Appearance reverted back, and is editable now
   passwordfield.style.backgroundColor = "#FFFFFF";
@@ -211,7 +273,6 @@ function revert() {
 // If user tries to paste a external source to the password field
 elPassword.addEventListener('paste', function() {
   sessionStorage.setItem('pasted', 'yes');
-
 });
 
 elEmail.addEventListener('input', function() {
@@ -222,9 +283,6 @@ elEmail.addEventListener('input', function() {
 elPassword.addEventListener('input', function() {
   setNeutralFor(passwordfield);
   passwordfield.style.backgroundColor = "#FFFFFF";
-  if (passwordfield.value == 0) {
-    sessionStorage.removeItem('pasted');
-  }
 });
 
 elConfirm.addEventListener('input', function() {
@@ -234,143 +292,40 @@ elConfirm.addEventListener('input', function() {
 
 // Actions that occur when user clicks on the password field
 elPassword.addEventListener('focus', function() {
-});
-
-// Actions that occur when user clicks on the confirm password field
-elConfirm.addEventListener('focus', function() {
-});
-
-// Actions that occur when user clicks outside the password field
-elPassword.addEventListener('change', function() {
   // if fields are green
   if (state == true) {
-    message.style.display = 'none';
     errorlabel.style.display = 'none';
   }
   // field are white
   else {
-
-    // message2.style.display = 'none';
-    // errorlabel2.style.display = 'none';
-
-    // message.style.display = 'block';
-    // errorlabel.style.display = 'block';
-
-    // user assumingly used their own randomly generated password that is at least 3C12
-    if (correctform.test(passwordfield.value) && sessionStorage.getItem('pasted') == 'yes') {
-      message2.style.display = 'none';
-      errorlabel2.style.display = 'none';
-
-      message.style.display = 'none';
-      errorlabel.style.display = 'none';
-
+    if (nudgecount == 0) {
+      nudgedisplay();
+      nudgecount = 1;
     }
-    // user assumingly used their own randomly generated password that doesn't meet 3C12
-    else if (correctform.test(passwordfield.value) == false && sessionStorage.getItem('pasted') == 'yes') {
-      strengthlevel.style.color = '#d6b85a';
-      strengthlevel.innerText = 'could be improved';
-
-      message2.style.display = 'none';
-      errorlabel2.style.display = 'none';
-
-      message.style.display = 'block';
-      errorlabel.style.display = 'block';
-
-    }
-    // person assumingly came up with their own password that is at least 3C12
-    else if (correctform.test(passwordfield.value) && sessionStorage.getItem('pasted') == null)  {
-      strengthlevel.style.color = '#d6b85a';
-      strengthlevel.innerText = 'could be improved';
-
-      message2.style.display = 'none';
-      errorlabel2.style.display = 'none';
-
-      message.style.display = 'block';
-      errorlabel.style.display = 'block';
-    }
-    // password that doesn't meet 3C12
-    else {
-      strengthlevel.style.color = '#ff7f7f';
-      strengthlevel.innerText = 'is weak and vulnerable';
-
-      message2.style.display = 'none';
-      errorlabel2.style.display = 'none';
-
-      message.style.display = 'block';
-      errorlabel.style.display = 'block';
-    }
-
   }
 });
 
-// Actions that occur when user clicks outside the confirm password field
-elConfirm.addEventListener('change', function() {
+// Actions that occur when user clicks on the confirm password field
+elConfirm.addEventListener('focus', function() {
   // if fields are green
   if (state == true) {
-    message2.style.display = 'none';
     errorlabel2.style.display = 'none';
   }
   // field are white
   else {
-    // message.style.display = 'none';
-    // errorlabel.style.display = 'none';
-
-    // message2.style.display = 'block';
-    // errorlabel2.style.display = 'block';
-
-    // user assumingly used their own randomly generated password that is at least 3C12
-    if (correctform.test(cpasswordfield.value) && sessionStorage.getItem('pasted') == 'yes') {
-      message.style.display = 'none';
-      errorlabel.style.display = 'none';
-
-      message2.style.display = 'none';
-      errorlabel2.style.display = 'none';
-
+    if (nudgecount == 0) {
+      nudgedisplay();
+      nudgecount = 1;
     }
-    // user assumingly used their own randomly generated password that doesn't meet 3C12
-    else if (correctform.test(cpasswordfield.value) == false && sessionStorage.getItem('pasted') == 'yes') {
-      strengthlevel2.style.color = '#d6b85a';
-      strengthlevel2.innerText = 'could be improved';
-
-      message.style.display = 'none';
-      errorlabel.style.display = 'none';
-
-      message2.style.display = 'block';
-      errorlabel2.style.display = 'block';
-
-    }
-    // person assumingly came up with their own password that meets password policy
-    else if (correctform.test(cpasswordfield.value) && sessionStorage.getItem('pasted') == null)  {
-      strengthlevel2.style.color = '#d6b85a';
-      strengthlevel2.innerText = 'could be improved';
-
-      message.style.display = 'none';
-      errorlabel.style.display = 'none';
-
-      message2.style.display = 'block';
-      errorlabel2.style.display = 'block';
-    }
-    // password that doesn't meet 3C12
-    else {
-      strengthlevel2.style.color = '#ff7f7f';
-      strengthlevel2.innerText = 'is weak and vulnerable';
-
-      message.style.display = 'none';
-      errorlabel.style.display = 'none';
-
-      message2.style.display = 'block';
-      errorlabel2.style.display = 'block';
-    }
-
   }
 });
 
 errorlabel.onmousedown = function () {
-  message.style.display = 'block';
+  nudgedisplay();
 }
 
 errorlabel2.onmousedown = function () {
-  message2.style.display = 'block';
+  nudgedisplay();
 }
 
 infomark.onmousedown = function () {
@@ -381,45 +336,9 @@ infomark2.onmousedown = function () {
   nudgedisplay();
 }
 
-// Make sure message disappears when user clicks on password field again
-elPassword.onmousedown = function () {
-  message.style.display = 'none';
-}
-
-// Make sure message disappears when user clicks on confirm password field again
-elConfirm.onmousedown = function () {
-  message2.style.display = 'none';
-}
-
-// Make sure message doesn't disappear when user clicks on message
-message.onmousedown = function () {
-  event.preventDefault();
-}
-
-// Make sure message doesn't disappear when user clicks on message
-message2.onmousedown = function () {
-  event.preventDefault();
-}
-
-// These actions will happen when the usestrong button is clicked (PASSWORD FIELD)
-usestrong.addEventListener('mousedown', function () {
-  document.getElementById("triedrandom").value = "Yes";
-  sessionStorage.setItem('triedrandom', "yes");
-  message.style.display = 'none';
-  nudgedisplay();
-});
-
-// These actions will happen when the usestrong button is clicked (CONFIRM PASSWORD FIELD)
-usestrong2.addEventListener('mousedown', function () {
-  document.getElementById("triedrandom").value = "Yes";
-  sessionStorage.setItem('triedrandom', "yes");
-  message2.style.display = 'none';
-  nudgedisplay();
-});
-
 function nextpage() {
   sessionStorage.clear();
-  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("registration.html");});
+  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("prototype2.html");});
   return true;
 }
 
@@ -459,7 +378,6 @@ if (sessionStorage.getItem('passpolicy') == '3C12') {
 }
 
 function completed() {
-  count = 1;
   setSuccessFor(emailfield);
   setSuccessFor(passwordfield);
   setSuccessFor(cpasswordfield);
@@ -479,10 +397,6 @@ function checkValidation() {
   var emailValue = emailfield.value.trim();
   var passValue = passwordfield.value.trim();
   var passValue2 = cpasswordfield.value.trim();
-
-  if (sessionStorage.getItem('useridle') != null) {
-    sessionStorage.setItem('userconfirmed', moment().tz(myTimezone).format(myDatetimeFormat2));
-  }
 
   // Scenario that user uses random password
   if (isEmail(emailValue) && passValue == retVal && passValue == passValue2 && passValue != "") {

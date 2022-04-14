@@ -60,42 +60,109 @@ var state = true;
 // make sure user can't interact with save prompt
 var count = 0;
 
-// User goes back to their respective page.
-// They can't go back to a previous page they visited
-// They can't jump to a page they havent visited
-var checkauthentication = sessionStorage.getItem('actualprocess');
-// should have an else in front of  if
-// replace with checkauthentication != null && checkauthentication == "registration.html")
-if (checkauthentication == null) {
-  var textArray = [
-      '1C8',
-      '3C12'
-  ];
-  var arrayPass = Math.floor(Math.random()*textArray.length);
+// Detecting browser name
+var result = bowser.getParser(window.navigator.userAgent);
+var name = result.getBrowserName();
+var nam = name.toLowerCase();
 
-  if (sessionStorage.getItem('passpolicy') == null) {
-    sessionStorage.setItem('passpolicy', textArray[arrayPass]);
+// Detecting platform type (Desktop / mobile)
+var platform = result.getPlatformType();
+var plat = platform.toLowerCase();
+
+// Detecting browser version
+var version = result.getBrowserVersion();
+var ver = parseInt(version);
+
+// User inactive timer
+var myTimer;
+var minutes = 10;
+
+// user using mobile
+if (plat == "mobile") {
+  swal({title: "Error", text: "You are currently on a " + plat + " device. Please use a desktop to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+}
+else {
+  // if browser is not chrome
+  if (name.toLowerCase().indexOf("chrome") == -1) {
+    // Checks for correct browser name. Ideally redirects them back to the recruitment post
+    // redirects them back to mturk homepage for now since idk the recruitment post link
+    swal({title: "Error", text: "You are currently using " + name + ". Please use Chrome to view this link.", icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
   }
-
-  // once page loaded, password is generated
-  var retVal = sessionStorage.getItem('randomPass');
-  if (retVal == null) {
-      retVal  = genrandom();
-      sessionStorage.setItem('randomPass', retVal);
+  // browser is chrome but not latest stable version
+  else {
+    if (ver < 95) {
+      swal({title: "Error", content: el, icon:"error",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("https://www.mturk.com/");});
+    }
+    else {
+      document.addEventListener("visibilitychange", function() {
+        // page out of sight
+        if (document.visibilityState === 'hidden') {
+          // then clear storage and show popup after
+          // myTimer = setTimeout(function(){sessionStorage.clear(); localStorage.clear(); sessionOut();}, 600000);
+          localStorage.setItem('setupTime', new Date().getTime());
+        }
+        // else {
+        //   clearTimeout(myTimer);
+        // }
+      });
+      var bc = new BroadcastChannel("my-awesome-site");
+      bc.onmessage = (event) => {
+        if (event.data === "Am I the first?") {
+          bc.postMessage(`No you're not.`);
+          // alert("Another tab of this site just got opened");
+        }
+        if (event.data === `No you're not.`) {
+          swal({title: "Error: Multiple Sessions", text: "You are only allowed to have one session at a time. To continue the study, close the extra sessions and refresh the inital session.", icon:"error",closeOnClickOutside: false, closeOnEsc: false, buttons: false});
+          //alert("An instance of this site is already running");
+        }
+      };
+      bc.postMessage('Am I the first?');
+    }
   }
+}
 
-  var savedpass = sessionStorage.getItem('SavedPass');
-  if (savedpass == null) {
-      savedpass  = retVal;
-      sessionStorage.setItem('SavedPass', savedpass);
+// Checks if user restored page too late (10 minutes)
+var now = new Date().getTime();
+var setupTime = localStorage.getItem('setupTime');
+if (setupTime != null) {
+  if (now-setupTime > minutes * 60 * 1000) {
+    localStorage.clear();
+    sessionStorage.clear();
   }
+}
 
-  var counting = sessionStorage.getItem('countime');
-  if (counting == null) {
-    counting = "1";
-    sessionStorage.setItem('countime', counting);
+window.addEventListener( "pageshow", function ( event ) {
+  var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+  if ( historyTraversal ) {
+    // Handle page restore.
+    window.location.reload(true);
   }
+});
 
+var textArray = ['1C8', '3C12'];
+var arrayPass = Math.floor(Math.random()*textArray.length);
+
+if (sessionStorage.getItem('passpolicy') == null) {
+  sessionStorage.setItem('passpolicy', textArray[arrayPass]);
+}
+
+// once page loaded, password is generated
+var retVal = sessionStorage.getItem('randomPass');
+if (retVal == null) {
+    retVal  = genrandom();
+    sessionStorage.setItem('randomPass', retVal);
+}
+
+var savedpass = sessionStorage.getItem('SavedPass');
+if (savedpass == null) {
+    savedpass  = retVal;
+    sessionStorage.setItem('SavedPass', savedpass);
+}
+
+var counting = sessionStorage.getItem('countime');
+if (counting == null) {
+  counting = "1";
+  sessionStorage.setItem('countime', counting);
 }
 
 // User not able to copy / cut anything from the page
@@ -525,7 +592,7 @@ fromweb2.addEventListener('mousedown', function () {
 
 function nextpage() {
   sessionStorage.clear();
-  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("registration.html");});
+  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("prototype1.html");});
   return true;
 }
 

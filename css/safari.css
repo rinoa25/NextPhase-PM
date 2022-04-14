@@ -1,6 +1,5 @@
 /* Imports custom font */
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-/* @import url(https://fonts.cdnfonts.com/css/menlo); */
 
 /* Sets the font of the entire page, customizes background & ensures form is responsive */
 html, body {
@@ -12,9 +11,8 @@ html, body {
 }
 
 /* Ensures form is responsive */
-.wholecon {
+body {
   display: flex;
-  top: 3%;
 }
 
 /* Customizes the form */

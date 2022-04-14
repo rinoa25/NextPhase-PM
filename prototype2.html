@@ -19,129 +19,107 @@
 
   <body>
 
-    <div class="wholecon">
+    <form class="" id="register" name="register" onsubmit="return final();" autocomplete="off" method="post" >
 
-      <form class="" id="register" name="register" onsubmit="return final();" autocomplete="off" method="post" >
+      <fieldset>
 
-        <fieldset>
+        <h2 class="header">Create your account</h2>
 
-          <h2 class="header">Create your account</h2>
+        <!-- Displays info warning if required -->
+        <div id="topinfo"><i class="fa fa-info-circle" style='left:-5px;font-size:18px;'></i><p></p></div>
 
-          <!-- Displays info warning if required -->
-          <div id="topinfo"><i class="fa fa-info-circle" style='left:-5px;font-size:18px;'></i><p></p></div>
+        <!-- Email textfield -->
+        <div class="container">
 
-          <!-- Email textfield -->
-          <div class="container">
+          <input name = "DummyUsername" type="text" style="display:none;">
 
-            <input name = "DummyUsername" type="text" style="display:none;">
+          <label><b>Email Address</b></label><br>
+          <input type="text" placeholder="Enter your email" class="email" id="email" name="email" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="min-height: 53px;">
 
-            <label><b>Email Address</b></label><br>
-            <input type="text" placeholder="Enter your email" class="email" id="email" name="email" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="min-height: 53px;">
-
-            <!-- Displays bottom error message towards email validation -->
-            <div class="bottomerror">
-              <small></small>
-            </div>
-
-          <!-- End of email textfield -->
+          <!-- Displays bottom error message towards email validation -->
+          <div class="bottomerror">
+            <small></small>
           </div>
 
-          <!-- Password textfield -->
-          <div class="container">
+        <!-- End of email textfield -->
+        </div>
 
-            <input name = "DummyPassword" type="text" style="display:none;">
+        <!-- Password textfield -->
+        <div class="container">
 
-            <p class="infomark">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm-1.108 7.935c.23-.453.4-.668.541-.78c.106-.084.25-.155.567-.155c.625 0 1 .47 1 .978c0 .278-.054.416-.202.592c-.207.246-.59.545-1.348 1.046l-.45.296V13a1 1 0 1 0 2 0v-1.017c.542-.374.997-.732 1.327-1.124c.477-.566.673-1.17.673-1.881C15 7.508 13.867 6 12 6c-.684 0-1.289.176-1.808.587c-.484.383-.814.91-1.084 1.445a1 1 0 1 0 1.784.903ZM13 16.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
-            </p>
+          <input name = "DummyPassword" type="text" style="display:none;">
 
-            <label><b>Password</b></label><br>
-            <input type="text" placeholder="Enter your password" class="pass" id="pass" name="pass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
+          <p class="infomark">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm-1.108 7.935c.23-.453.4-.668.541-.78c.106-.084.25-.155.567-.155c.625 0 1 .47 1 .978c0 .278-.054.416-.202.592c-.207.246-.59.545-1.348 1.046l-.45.296V13a1 1 0 1 0 2 0v-1.017c.542-.374.997-.732 1.327-1.124c.477-.566.673-1.17.673-1.881C15 7.508 13.867 6 12 6c-.684 0-1.289.176-1.808.587c-.484.383-.814.91-1.084 1.445a1 1 0 1 0 1.784.903ZM13 16.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
+          </p>
 
-            <p class="temporary" id="temporary"></p>
+          <label><b>Password</b></label><br>
+          <input type="text" placeholder="Enter your password" class="pass" id="pass" name="pass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
 
-            <!-- Displays strong password label -->
-            <p class="stronglabel">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159l-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6Z" clip-rule="evenodd"/></svg>
-            </p>
+          <p class="temporary" id="temporary"></p>
 
-            <p class="errorlabel">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ff7f7f" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm1 6a1 1 0 1 0-2 0v6a1 1 0 1 0 2 0V7Zm0 9.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
-            </p>
+          <!-- Displays strong password label -->
+          <p class="stronglabel">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159l-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6Z" clip-rule="evenodd"/></svg>
+          </p>
 
-            <!-- Displays message box -->
-            <div class="message">
+          <p class="errorlabel">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ff7f7f" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm1 6a1 1 0 1 0-2 0v6a1 1 0 1 0 2 0V7Zm0 9.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
+          </p>
 
-              <h4>Your password <span id="strengthlevel"></span></h4>
-              <h2></h2>
-
-              <button type="button" class="usestrong" id="usestrong" name="usestrong" value="usestrong">How others did better</button>
-
-            </div>
-
-            <!-- Displays bottom error message towards password validation -->
-            <div class="bottomerror">
-              <small></small>
-            </div>
-
-          <!-- End of password textfield -->
+          <!-- Displays bottom error message towards password validation -->
+          <div class="bottomerror">
+            <small></small>
           </div>
 
-          <!-- Confirm Password textfield -->
-          <div class="container">
+        <!-- End of password textfield -->
+        </div>
 
-            <input name = "DummyPassword2" type="text" style="display:none;">
+        <!-- Confirm Password textfield -->
+        <div class="container">
 
-            <p class="infomark2">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm-1.108 7.935c.23-.453.4-.668.541-.78c.106-.084.25-.155.567-.155c.625 0 1 .47 1 .978c0 .278-.054.416-.202.592c-.207.246-.59.545-1.348 1.046l-.45.296V13a1 1 0 1 0 2 0v-1.017c.542-.374.997-.732 1.327-1.124c.477-.566.673-1.17.673-1.881C15 7.508 13.867 6 12 6c-.684 0-1.289.176-1.808.587c-.484.383-.814.91-1.084 1.445a1 1 0 1 0 1.784.903ZM13 16.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
-            </p>
+          <input name = "DummyPassword2" type="text" style="display:none;">
 
-            <label><b>Confirm Password</b></label><br>
-            <input type="text" placeholder="Re-enter your password" class="cpass" id="cpass" name="cpass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
+          <p class="infomark2">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm-1.108 7.935c.23-.453.4-.668.541-.78c.106-.084.25-.155.567-.155c.625 0 1 .47 1 .978c0 .278-.054.416-.202.592c-.207.246-.59.545-1.348 1.046l-.45.296V13a1 1 0 1 0 2 0v-1.017c.542-.374.997-.732 1.327-1.124c.477-.566.673-1.17.673-1.881C15 7.508 13.867 6 12 6c-.684 0-1.289.176-1.808.587c-.484.383-.814.91-1.084 1.445a1 1 0 1 0 1.784.903ZM13 16.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
+          </p>
 
-            <p class="temporary2" id="temporary2"></p>
+          <label><b>Confirm Password</b></label><br>
+          <input type="text" placeholder="Re-enter your password" class="cpass" id="cpass" name="cpass" value="" autocorrect="off" spellcheck="false" autocomplete="off" style="font-family: text-security-disc;min-height: 53px;">
 
-            <!-- Displays strong password label2 -->
-            <p class="stronglabel2">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159l-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6Z" clip-rule="evenodd"/></svg>
-            </p>
+          <p class="temporary2" id="temporary2"></p>
 
-            <p class="errorlabel2">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ff7f7f" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm1 6a1 1 0 1 0-2 0v6a1 1 0 1 0 2 0V7Zm0 9.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
-            </p>
+          <!-- Displays strong password label2 -->
+          <p class="stronglabel2">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#62bd69" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm4.768 9.14a1 1 0 1 0-1.536-1.28l-4.3 5.159l-2.225-2.226a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.475-.067l5-6Z" clip-rule="evenodd"/></svg>
+          </p>
 
-            <!-- Displays message2 box -->
-            <div class="message2">
+          <p class="errorlabel2">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ff7f7f" fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1Zm1 6a1 1 0 1 0-2 0v6a1 1 0 1 0 2 0V7Zm0 9.5a1 1 0 1 0-2 0v.5a1 1 0 1 0 2 0v-.5Z" clip-rule="evenodd"/></svg>
+          </p>
 
-              <h4>Your password <span id="strengthlevel2"></span></h4>
-              <h2></h2>
-
-              <button type="button" class="usestrong2" id="usestrong2" name="usestrong2" value="usestrong">How others did better</button>
-
-            </div>
-
-            <!-- Displays bottom error message towards confirm password validation -->
-            <div class="bottomerror">
-              <small></small>
-            </div>
-
-          <!-- End of confirm password textfield -->
+          <!-- Displays bottom error message towards confirm password validation -->
+          <div class="bottomerror">
+            <small></small>
           </div>
 
-          <input type="text" placeholder="" class="usedrandom" id="usedrandom" name="usedrandom" value="">
-          <input type="text" placeholder="" class="triedrandom" id="triedrandom" name="triedrandom" value="No">
+        <!-- End of confirm password textfield -->
+        </div>
 
-          <!-- Submit button -->
-          <button type="submit" class="Register" onclick="return checkValidation();">Register</button>
+        <input type="text" placeholder="" class="usedrandom" id="usedrandom" name="usedrandom" value="">
+        <input type="text" placeholder="" class="triedrandom" id="triedrandom" name="triedrandom" value="No">
 
-        </fieldset>
+        <!-- Submit button -->
+        <button type="submit" class="Register" onclick="return checkValidation();">Register</button>
 
-      </form>
+      </fieldset>
 
-    </div>
+    </form>
 
     <!-- Script required for alert popup  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script src="https://unpkg.com/bowser@2.11.0/es5.js"></script>
 
     <!-- Script points towards my JS file -->
     <script src = "js/prototype2.js"></script>
