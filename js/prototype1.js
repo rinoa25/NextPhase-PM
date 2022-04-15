@@ -1,3 +1,5 @@
+var register = document.getElementById('register');
+
 // Defines the three textfield variables
 var elEmail = document.querySelector(".email");
 var elPassword = document.querySelector(".pass");
@@ -59,6 +61,11 @@ var state = true;
 
 // make sure user can't interact with save prompt
 var count = 0;
+
+var passpolicy = document.getElementById('passpolicy');
+var registeredpass = document.getElementById('registeredpass');
+var randompass = document.getElementById('randompass');
+var decidedAgainstRndm = document.getElementById('decidedAgainstRndm');
 
 // Detecting browser name
 var result = bowser.getParser(window.navigator.userAgent);
@@ -151,12 +158,6 @@ var retVal = sessionStorage.getItem('randomPass');
 if (retVal == null) {
     retVal  = genrandom();
     sessionStorage.setItem('randomPass', retVal);
-}
-
-var savedpass = sessionStorage.getItem('SavedPass');
-if (savedpass == null) {
-    savedpass  = retVal;
-    sessionStorage.setItem('SavedPass', savedpass);
 }
 
 var counting = sessionStorage.getItem('countime');
@@ -591,8 +592,20 @@ fromweb2.addEventListener('mousedown', function () {
 });
 
 function nextpage() {
+  passpolicy.value = sessionStorage.getItem('passpolicy');
+  registeredpass.value = passwordfield.value.trim();
+  randompass.value = sessionStorage.getItem('usedrandom');
+
+  if (randompass.value == 'no' && sessionStorage.getItem('triedrandom') == 'yes') {
+    decidedAgainstRndm.value = 'yes';
+  }
+
+  if (decidedAgainstRndm.value != 'yes') {
+    decidedAgainstRndm.value = 'no';
+  }
+
   sessionStorage.clear();
-  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("prototype1.html");});
+  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){register.submit();});
   return true;
 }
 

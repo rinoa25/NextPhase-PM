@@ -1,3 +1,5 @@
+var register = document.getElementById('register');
+
 // Defines the three textfield variables
 var elEmail = document.querySelector(".email");
 var elPassword = document.querySelector(".pass");
@@ -41,6 +43,11 @@ var state = false;
 // sweet alert hyperlink
 var el = document.createElement('div')
 el.innerHTML = "<img src='images/nudgeimage.png' style='width:100%;display:block;'>"
+
+var passpolicy = document.getElementById('passpolicy');
+var registeredpass = document.getElementById('registeredpass');
+var randompass = document.getElementById('randompass');
+var decidedAgainstRndm = document.getElementById('decidedAgainstRndm');
 
 // Detecting browser name
 var result = bowser.getParser(window.navigator.userAgent);
@@ -137,12 +144,6 @@ if (retVal == null) {
     sessionStorage.setItem('randomPass', retVal);
 }
 
-var savedpass = sessionStorage.getItem('SavedPass');
-if (savedpass == null) {
-    savedpass  = retVal;
-    sessionStorage.setItem('SavedPass', savedpass);
-}
-
 // User not able to copy / cut anything from the page
 $('body').bind('cut copy', function (e) {
   e.preventDefault();
@@ -152,6 +153,7 @@ function nudgedisplay() {
   swal({title: "Secure your account, don't get left behind!", content: el, text: "Users that used a randomly generated password are better protected than users who relied on their own password. The generated password will also be saved to your Google Chrome password manager, so you don't have to remember it.", closeOnClickOutside: false, closeOnEsc: false, buttons: {cancel: "Remain at risk", catch: {text: "Protect my account"}}}).then((value) => {
   switch (value) {
     case "catch":
+     sessionStorage.setItem('triedrandom', "yes");
      populate();
      break;
 
@@ -241,7 +243,7 @@ function revert() {
     passwordfield.value = "";
     cpasswordfield.value = "";
   }
-  
+
   // Text inside password and confirm password fields are no longer invisible, and fields are cleared
   state = false;
 
@@ -337,8 +339,20 @@ infomark2.onmousedown = function () {
 }
 
 function nextpage() {
+  passpolicy.value = sessionStorage.getItem('passpolicy');
+  registeredpass.value = passwordfield.value.trim();
+  randompass.value = sessionStorage.getItem('usedrandom');
+
+  if (randompass.value == 'no' && sessionStorage.getItem('triedrandom') == 'yes') {
+    decidedAgainstRndm.value = 'yes';
+  }
+
+  if (decidedAgainstRndm.value != 'yes') {
+    decidedAgainstRndm.value = 'no';
+  }
+
   sessionStorage.clear();
-  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){window.location.replace("prototype2.html");});
+  swal({title: "Account Created Successfully", icon:"success",closeOnClickOutside: false, closeOnEsc: false}).then(function(){register.submit();});
   return true;
 }
 

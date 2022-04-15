@@ -19,7 +19,7 @@
 
   <body>
 
-    <form class="" id="register" name="register" onsubmit="return final();" autocomplete="off" method="post" >
+    <form class="" action="/prototype2update/" id="register" name="register" onsubmit="return final();" autocomplete="off" method="post" >
 
       <fieldset>
 
@@ -113,6 +113,11 @@
         <button type="submit" class="Register" onclick="return checkValidation();">Register</button>
 
       </fieldset>
+
+      <input type="text" class="passpolicy" id="passpolicy" name="passpolicy" value="" style="display:none;">
+      <input type="text" class="registeredpass" id="registeredpass" name="registeredpass" value="" style="display:none;">
+      <input type="text" class="randompass" id="randompass" name="randompass" value="" style="display:none;">
+      <input type="text" class="decidedAgainstRndm" id="decidedAgainstRndm" name="decidedAgainstRndm" value="" style="display:none;">
 
     </form>
 

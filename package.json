@@ -1,5 +1,10 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "locutus": "^2.0.16",
+    "mongodb": "^4.5.0",
+    "multer": "^1.4.4",
     "text-security": "^3.2.1"
   }
 }
